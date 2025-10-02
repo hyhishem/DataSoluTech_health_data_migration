@@ -1,50 +1,26 @@
-# DataSoluTech: migration des données médicales de patients
+# DataSoluTech: migration des données médicales de patients (V0.1)
 
-## Objectifs
-
-### Sommaire des versions
-- V0.1 - Nettoyage de données CSV avec Pandas
-- V0.2 - 
-- V0.3 -
-- V0.4 - 
-- V0.5 -
-
-# V0.1 - Nettoyage de données CSV avec Pandas
-
-## Contexte
-Ce projet est la première version d'un script de nettoyage et d'analyse de données CSV médicales.  
-Il permet de :
+## Details V0.1
+La première version est un script de nettoyage du fichier relatives aux données médicales que l'on souhaite faire migrer vers mongodb.  
+Le script permet de :
 - lire un fichier CSV fourni par l'utilisateur ;
 - nettoyer les données (formatage des noms, typage des colonnes) ;
 - supprimer les doublons ;
 - sauvegarder le fichier nettoyé avec le préfixe `clean_`.
 
+## Prérequis
+python3
 
 ## Installation
-1. Créer un environnement virtuel :
+pandas à partir du fichier requirements.txt
    ```bash
-        $ python3 -m venv .mon_env
-
-   
-.mon_env est ajouté à .gitignior pour éviter de surcharger le dossier.
-
-2. Activer l'environnement :
-   ```bash
-   $ source .mon_env/bin/activate
+   $ pip install -r requirements.txt
    ```
-
-3. Installer pandas à partir du fichier requirements.txt
-   -Ajouter pandas==2.2.3
-   ```bash
-   $ source pip install -r requirements.txt
-    ```
-
-   
-Certains dépandances inutile sont ajouter et  peuvent être retiré. 
+Certains dépandances sont ajouter automatiquement. 
 
 ## Utilisation
 
-Placer votre fichier CSV dans le même dossier que le script.
+Placer le fichier avec les données médicales (.CSV) dans le même dossier que le script.
 
 Lancer le script après avoir activer l'environement  :
    ```bash
@@ -54,7 +30,6 @@ Lancer le script après avoir activer l'environement  :
 Entrer le nom du fichier avec l'extention CSV lorsque le script le demande.
 
 Le fichier nettoyé sera sauvegardé automatiquement sous le nom clean_<nom_du_fichier>.csv.
-
 
 ## Fonctionnalités de cette version
 
@@ -74,12 +49,3 @@ Les fichiers CSV originaux ne sont pas modifiés. les fichiers nettoyés sont sa
 
 
 
-# V0.2 - 
-
-
-
-# V0.3 -
-
-
-
-# V0.4 -  
