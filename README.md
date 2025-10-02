@@ -1,85 +1,80 @@
-# DataSoluTech: migration des données médicales de patients
+# DataSoluTech: migration des données médicales de patients (V0.2)
 
-## Objectifs
+## Context et details V0.2
+Dans la version précédente (V0.1), nous avons développé un script permettant de nettoyer un fichier CSV contenant des données médicales.
+La V0.2 ajoute une étape : la migration des données nettoyées vers une base MongoDB, avec la possibilité de les visualiser dans Mongo Express.
 
-### Sommaire des versions
-- V0.1 - Nettoyage de données CSV avec Pandas
-- V0.2 - 
-- V0.3 -
-- V0.4 - 
-- V0.5 -
+Cette version comprend :
 
-# V0.1 - Nettoyage de données CSV avec Pandas
+1. un script Python pour
+- nettoyer les données avec pandas (V0.1)
+- transférer les données dans MongoDB.
 
-## Contexte
-Ce projet est la première version d'un script de nettoyage et d'analyse de données CSV médicales.  
-Il permet de :
-- lire un fichier CSV fourni par l'utilisateur ;
-- nettoyer les données (formatage des noms, typage des colonnes) ;
-- supprimer les doublons ;
-- sauvegarder le fichier nettoyé avec le préfixe `clean_`.
+2. un fichier docker-compose.yml qui déploie :
+- MongoDB
+- Mongo Express (interface graphique web pour MongoDB)
+
+## Prérequis
+python3
+pip
+Docker et Docker Compose 
 
 
 ## Installation
-1. Créer un environnement virtuel :
-   ```bash
-        $ python3 -m venv .mon_env
+### Python
 
+Installer les dépendances nécessaires :
+
+ ```bash
+ $ pip install -r requirements.txt
+ ```
    
-.mon_env est ajouté à .gitignior pour éviter de surcharger le dossier.
+### Côté Docker
 
-2. Activer l'environnement :
-   ```bash
-   $ source .mon_env/bin/activate
-   ```
+Lancer les services MongoDB et Mongo Express avec :
 
-3. Installer pandas à partir du fichier requirements.txt
-   -Ajouter pandas==2.2.3
-   ```bash
-   $ source pip install -r requirements.txt
-    ```
+ ```bash
+ $ docker-compose up -d
+ ```
 
-   
-Certains dépandances inutile sont ajouter et  peuvent être retiré. 
 
 ## Utilisation
 
-Placer votre fichier CSV dans le même dossier que le script.
+Placer le fichier CSV à migrer dans le même dossier que le script Python.
 
-Lancer le script après avoir activer l'environement  :
-   ```bash
-   $ python3 cleaner.py
-   ```
+Lancer le script :
 
-Entrer le nom du fichier avec l'extention CSV lorsque le script le demande.
+ ```bash
+ $ python3 main_script.py
+ ```
 
-Le fichier nettoyé sera sauvegardé automatiquement sous le nom clean_<nom_du_fichier>.csv.
+Le script effectuera :
+
+- le nettoyage des données (comme en V0.1) 
+- quelques operations CRUD
+- la migration  dans MongoDB (health_data.patients)
+
+Mongo Express est accessible sur http://localhost:8081
+
+Identifiant mongo express: admin
+Mot de passe mongo express: pass
 
 
 ## Fonctionnalités de cette version
 
-Nettoyage de la colonne Name (mise en Title case) .
-
-Conversion des colonnes Date of Admission et Discharge Date en format date.
-
-Suppression des doublons.
-
-Aperçu des premières lignes et du type des colonnes avant et après nettoyage.
+- Nettoyer les données avec pandas (hérité de la V0.1)
+- Connexion à MongoDB via pymongo
+- Création de la base health_data et de la collection patients
+- Operations CRUD 
+- Insertion des documents issus du fichier nettoyé
+- Interface Mongo Express pour visualiser et interroger les données
 
 ## Remarques
 
-Cette version non automatisé est uniquement basée sur pandas pour le nettoyage .
+Cette version permet d’avoir un premier flux complet (CSV - Nettoyage - MongoDB - Visualisation) 
 
-Les fichiers CSV originaux ne sont pas modifiés. les fichiers nettoyés sont sauvegardés avec le préfixe clean_.
+Les identifiants par défaut (admin/admin123  et admin/pass) sont uniquement utilisés pour le développement local. Pour un déploiement réel, il est recommandé de renforcer la sécurité (authentification, rôles, mot de passe fort). 
 
-
-
-# V0.2 - 
+En ce qui concerne la structure du script, il serait pertinent de l’organiser en plusieurs fonctions pour le rendre plus lisible, réutilisable et résilient.
 
 
-
-# V0.3 -
-
-
-
-# V0.4 -  
