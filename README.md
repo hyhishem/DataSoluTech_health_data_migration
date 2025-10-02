@@ -56,8 +56,8 @@ Le script effectuera :
 
 Mongo Express est accessible sur http://localhost:8081
 
-Identifiant mongo express: admin
-Mot de passe mongo express: pass
+- Identifiant mongo express: admin
+- Mot de passe mongo express: pass
 
 
 ## Fonctionnalités de cette version
