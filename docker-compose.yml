@@ -13,6 +13,19 @@ services:
     networks:
       - mongo_net
       
+  python:
+    image: python:3.11-slim
+    container_name: python
+    volumes:
+      - ./scripts:/app     
+      - ./data:/data       
+    depends_on:
+      - mongo
+    networks:
+      - mongo_net
+    stdin_open: true
+    tty: true
+
   mongo-express:
     image: mongo-express:1
     container_name: mongo-express

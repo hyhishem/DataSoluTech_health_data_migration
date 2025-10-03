@@ -42,15 +42,6 @@ lignes_apres = len(df)  #  Nombre de lignes après avoir supprimer les doublons
 print(f" \n \n {lignes_avant - lignes_apres} doublons ont été supprimés")
 
 
-####################################
-#Sauvegarde du fichier nettoyé 
-####################################
-
-output_file = "clean_" + dataset   # Ajout d'un préfix pour definir le nom du fichier nettoyer 
-
-df.to_csv(output_file, index=False)
-print(f"\n\nLes données nettoyées sont sauvegardées dans '{output_file}'")
-
 ######################
 # Aperçu final 
 ######################
@@ -72,7 +63,7 @@ print(df.dtypes)
 # Connexion
 ######################
 
-client = MongoClient("mongodb://admin:admin123@localhost:27017/")
+client = MongoClient("mongodb://admin:admin123@mongo:27017/")
 
 ######################
 # CRUD
