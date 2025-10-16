@@ -1,80 +1,83 @@
-# DataSoluTech: migration des données médicales de patients (V0.2)
+# DataSoluTech: migration des données médicales de patients (V1.0)
 
-## Context et details V0.2
-Dans la version précédente (V0.1), nous avons développé un script permettant de nettoyer un fichier CSV contenant des données médicales.
-La V0.2 ajoute une étape : la migration des données nettoyées vers une base MongoDB, avec la possibilité de les visualiser dans Mongo Express.
+## Context et details
+
+Dans la version précédente V0.1, nous avons développé un script permettant de nettoyer un fichier CSV contenant des données médicales. La V0.2 ajoute une étape : la migration des données nettoyées vers une base MongoDB, avec la possibilité de les visualiser dans Mongo Express. Dans la version V0.3 l'ensemble des services sont conteneurisé sans automatisation.  
 
 Cette version comprend :
 
-1. un script Python pour
-- nettoyer les données avec pandas (V0.1)
-- transférer les données dans MongoDB.
+1. Un fichier docker-compose.yml avec :
+- Python,
+    - Installe les dépendances
+    - Exécute un script pour créer différents utilisateurs Mongo définis via les variables d'environnement. 
+- MongoDB, avec un volume persistant pour stocker les données. 
+- Mongo Express pour visualiser et administrer les bases MongoDB via une interface web
+- Un réseau pour permettre la communication entre les conteneurs.
 
-2. un fichier docker-compose.yml qui déploie :
-- MongoDB
-- Mongo Express (interface graphique web pour MongoDB)
+2. Un script principal utilisant plusieurs fonctions :  
+   - Gestion interactive et automatisée des bases de données et collections MongoDB.  
+   - Création et gestion des clés pour structurer les documents.  
+   - Nettoyage et transformation des données avant insertion pour garantir la cohérence et l’intégrité
+   - Insertion manuelle de documents ou migration automatisée depuis des fichiers CSV.  
 
 ## Prérequis
-python3
-pip
-Docker et Docker Compose 
+Docker et Docker Compose: installés pour déployer les conteneurs MongoDB, Python et Mongo Express.  
 
 
-## Installation
-### Python
+## Authentification et rôles 
 
-Installer les dépendances nécessaires :
+Trois comptes sont crées :
 
- ```bash
- $ pip install -r requirements.txt
- ```
-   
-### Côté Docker
+- admin pour la gestion complète. Mot de passe admin123
+- rw  pour l'ecriture et la lecture.  Mot de passe rw123
+- read en lecture seule. Mot de passe read123
 
-Lancer les services MongoDB et Mongo Express avec :
-
- ```bash
- $ docker-compose up -d
- ```
-
-
-## Utilisation
-
-Placer le fichier CSV à migrer dans le même dossier que le script Python.
-
-Lancer le script :
-
- ```bash
- $ python3 main_script.py
- ```
-
-Le script effectuera :
-
-- le nettoyage des données (comme en V0.1) 
-- quelques operations CRUD
-- la migration  dans MongoDB (health_data.patients)
-
-Mongo Express est accessible sur http://localhost:8081
+L'acces à Mongo Express est possible sur http://localhost:8081
 
 - Identifiant mongo express: admin
 - Mot de passe mongo express: pass
 
 
-## Fonctionnalités de cette version
+## Installation avec Docker et Docker-compose
 
-- Nettoyer les données avec pandas (hérité de la V0.1)
-- Connexion à MongoDB via pymongo
-- Création de la base health_data et de la collection patients
-- Operations CRUD 
-- Insertion des documents issus du fichier nettoyé
-- Interface Mongo Express pour visualiser et interroger les données
+Pour déployer l'environnement complet avec MongoDB, Mongo Express et le conteneur Python :  
 
-## Remarques
+ ```bash
+ $ docker-compose up -d
+ ```
+Cette commande :
+- Télécharge les images nécessaires (MongoDB, Mongo Express, Python).
+- Crée et démarre les conteneurs dans le réseau défini.
+- Monte les volumes pour la persistance des données et le partage des scripts et CSV.
+- Exécute automatiquement le script Python pour créer les utilisateurs MongoDB et installer les dépendances.
 
-Cette version permet d’avoir un premier flux complet (CSV - Nettoyage - MongoDB - Visualisation) 
+## Utilisation
 
-Les identifiants par défaut (admin/admin123  et admin/pass) sont uniquement utilisés pour le développement local. Pour un déploiement réel, il est recommandé de renforcer la sécurité (authentification, rôles, mot de passe fort). 
+Cette version du projet peut être utilisée de deux façons :  
 
-En ce qui concerne la structure du script, il serait pertinent de l’organiser en plusieurs fonctions pour le rendre plus lisible, réutilisable et résilient.
+1. Mode automatisé avec arguments
+
+Permet de lancer directement la migration depuis un fichier CSV vers MongoDB :  
+
+ ```bash
+ $ docker exec -it python python3 /app/main_script.py --csv /data/dataset.csv --db health_data --collection patients --user rw  --password rw123
+ ```
+--csv : chemin vers le fichier CSV.
+
+--db : nom de la base MongoDB.
+
+--collection : nom de la collection cible.
+
+--user / --password : identifiants MongoDB.
+
+--pas_vider_col : optionnelle, vide la collection avant insertion par defaut, ajouter pour ne pas vider la collection.
 
 
+2. Mode interactif via menu:
+   
+Si tous les arguments essentiels ne sont pas fournis, le script lance un menu interactif permettant :
+
+- De sélectionner ou créer une base et une collection.
+- De gérer les clés (ajouter ou visualiser).
+- D’insérer des documents manuellement.
+- De migrer un fichier CSV après nettoyage.
