@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from pymongo import MongoClient
 
 def choisir_ou_creer_base(client):

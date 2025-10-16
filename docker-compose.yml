@@ -14,7 +14,8 @@ services:
       - mongo_net
       
   python:
-    image: python:3.11-slim
+    build:
+      dockerfile: dockerfile  
     container_name: python
     volumes:
       - ./scripts:/app     
@@ -34,7 +35,7 @@ services:
       - mongo_net
     stdin_open: true
     tty: true
-    command: bash -c "pip install --no-cache-dir -r app/requirements.txt && python3 app/mongo_users_create.py && bash"
+    command: bash -c "python3 app/mongo_users_create.py && bash"
 
 
   mongo-express:

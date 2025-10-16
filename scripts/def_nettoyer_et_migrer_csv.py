@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-
 import pandas as pd
 from pymongo import MongoClient
-from datetime import datetime
-import os
+import os                   # interaction avec le system et les variables d’environnement
 
 
 def nettoyer_et_migrer_csv(db, collection, csv_file, vider_col):
@@ -30,7 +27,7 @@ def nettoyer_et_migrer_csv(db, collection, csv_file, vider_col):
     if vider_col:
         try :
             collection.delete_many({})
-            print("Tous les documents de la collection ont été supprimer")
+            print(f"Tous les documents de la collection {collection.name} ont été supprimé.")
         except Exception as e:
            if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
                 print("Vous n'avez pas les droits pour supprimer des documents.")
