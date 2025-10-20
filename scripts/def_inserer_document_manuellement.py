@@ -14,6 +14,7 @@ def inserer_document_manuellement(db, collection):
         choix = input("\nVoulez-vous insérer un document (oui ou non)?: ").strip().lower()
         if choix != "oui":
             break
+        
         document = {}
         for cle in cles:
             valeur = input(f"Inserer une valeur pour '{cle['nom_cle']}' ({cle['type_cle']}).\nLaisser vide pour ignorer la clé : ").strip()
@@ -26,12 +27,14 @@ def inserer_document_manuellement(db, collection):
                     valeur = int(valeur)
                 elif cle["type_cle"]=="float":
                     valeur = float(valeur)
-                elif cle["type_cle"]=="date":
+                elif cle["type_cle"]=="date" or cle["type_cle"]=="datetime":
                     valeur = datetime.strptime(valeur, "%Y-%m-%d")
             except ValueError:
-                print(f"\n Valeur invalide pour '{cle['nom_cle']}', ignorée.")
+                print(f"\n Valeur invalide pour '{cle['nom_cle']}', ignorée \n.")
                 continue
             document[cle["nom_cle"]] = valeur
+        
+        
         if document:
             try:
                 collection.insert_one(document)
@@ -39,8 +42,10 @@ def inserer_document_manuellement(db, collection):
             except Exception as e:
                 if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
                     print("Vous n'avez pas les droits pour ajouter des documents.")
+                elif  "duplicate key" in  e.details.get("errmsg", str(e)).lower():      
+                        print("Erreur: Critère d'unicité de l'index non respecté ")
                 else:
-                    print("Erreur mongo")
+                        print("Erreur mongo :" , e.details.get("errmsg", str(e)) )
 
 
 

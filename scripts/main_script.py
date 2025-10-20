@@ -59,14 +59,14 @@ else:
 # Mode interactif: s'active s'il manque au moins un argument essentiel pour la migration (csv, db , collection) 
 #########
 
-    print("\n\n************************************\n* Gestion MongoDB : MODE INTERACTIF *\n************************************")
+    print("\n\n************************************\n* Gestion MongoDB : MODE INTERACTIF pour CRUD*\n************************************")
     db = choisir_ou_creer_base(client)                  #Permet de choisir ou de créer une base de données cible pour la migration
     if db is not None:
       collection = choisir_ou_creer_collection(db)      #Permet de choisir ou de créer une collection dans la base cible
       if collection is not None:
           while True:
             print("""
-        1. Gérer les clés 
+        1. Gérer les clés  # CRUD des clés 
         2. Insérer un document manuellement
         3. Migrer depuis CSV
         4. Quitter
