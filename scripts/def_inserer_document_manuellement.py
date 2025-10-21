@@ -5,11 +5,29 @@ from pymongo import MongoClient
 from datetime import datetime
 
 
-def inserer_document_manuellement(db, collection):
+def inserer_document_manuellement(db, collection, nom_doc=None, age_doc=None):
+
+
     cles = list(db["cles"].find({}, {"_id":0}))
     if not cles:
         print("Aucune clé disponible.")
         return
+        
+
+#########
+# Afficher un documents de la collection    
+############
+
+    if nom_doc: 
+        doc_nom= list(collection.find({'Name':nom_doc}, {"_id":0}))
+        print(f"Résultats de votre recherche sur la clé 'Name': {nom_doc}:\n")
+        print(f"{doc_nom}:\n")
+    if age_doc:
+        doc_age= list(collection.find({'Age':age_doc}, {"_id":0}))
+        print(f"Résultats de votre recherche sur la clé 'Age': {age_doc}:\n")
+        print(f"{doc_age}:\n")
+    
+
     while True:
         choix = input("\nVoulez-vous insérer un document (oui ou non)?: ").strip().lower()
         if choix != "oui":

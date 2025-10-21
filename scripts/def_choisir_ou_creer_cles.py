@@ -83,14 +83,14 @@ def choisir_ou_creer_cles(db, collection):
 
         choix = input(f"\nSouhaitez-vous renommer une clé de la collection {collection_cles.name}?  (oui ou non) ").strip().lower()
         if choix == "oui":
-                cle_index = int(input(f"\nIndiquer l'index relatif à la clé que vous souhaitez modifier :").strip())
-                ancienne_cle=cles[cle_index]['nom_cle']              
-                nouvelle_cle = input(f"\n Entrer la nouvelle valeur :").strip()
-                try:    
-                    if 0<= cle_index <len(cles):
-                         collection_cles.update_one({"nom_cle": ancienne_cle},{"$set": {"nom_cle": nouvelle_cle}})
-                except:
-                    print("Réponse invalide.")
+            cle_index = int(input(f"\nIndiquer l'index relatif à la clé que vous souhaitez modifier :").strip())
+            ancienne_cle=cles[cle_index]['nom_cle']              
+            nouvelle_cle = input(f"\n Entrer la nouvelle valeur :").strip()
+            try:    
+               if 0<= cle_index <len(cles):
+                  collection_cles.update_one({"nom_cle": ancienne_cle},{"$set": {"nom_cle": nouvelle_cle}})
+            except:
+               print("Réponse invalide.")
         elif choix == "non":
             None
         else:
@@ -142,8 +142,8 @@ def choisir_ou_creer_cles(db, collection):
         choix = input(f"\nSouhaitez-vous supprimer un document de la collection {collection_cles.name}?  (oui ou non) ").strip().lower()
         if choix == "oui":
                 try:
-                cle_index = int(input(f"\nIndiquer l'index relatif à la clé que vous souhaitez modifier :").strip())
-                nom_cle=cles[cle_index]['nom_cle']  
+                    cle_index = int(input(f"\nIndiquer l'index relatif à la clé que vous souhaitez supprimer :").strip())
+                    nom_cle=cles[cle_index]['nom_cle']  
                     if 0<= cle_index <len(cles):
                          collection_cles.delete_one({"nom_cle": nom_cle})
                 except:

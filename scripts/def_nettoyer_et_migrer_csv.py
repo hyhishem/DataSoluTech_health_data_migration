@@ -56,7 +56,7 @@ def nettoyer_et_migrer_csv(db, collection, csv_file, pas_vider_col):
     else:
         print("Aucun document valide.")
     
-    collection.create_index([("Name", 1), ("Date of Admission", 1), ("Room Number", 1)],unique=True, name="index_name_date_room") # Creation de l'index
+    collection.create_index([("Name", 1), ("Age", 1), ("Date of Admission", 1), ("Room Number", 1)],unique=True, name="index_name_date_room") # Creation de l'index
     return
 
 ######### 
