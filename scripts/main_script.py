@@ -9,10 +9,6 @@ import getpass                  # Saisie sécurisée de mot de passe
 
 
 # Import des fonctions définies
-from def_choisir_ou_creer_base import choisir_ou_creer_base
-from def_choisir_ou_creer_collection import choisir_ou_creer_collection
-from def_choisir_ou_creer_cles import choisir_ou_creer_cles
-from def_inserer_document_manuellement import inserer_document_manuellement
 from def_nettoyer_et_migrer_csv import nettoyer_et_migrer_csv
 from def_crud_collection import crud_collection
 
@@ -69,36 +65,6 @@ elif args.crud and args.nom and args.db and args.collection and ( client is not 
 
 
 
-else:
-#########
-# Mode interactif: s'active s'il manque au moins un argument essentiel pour la migration (csv, db , collection) 
-#########
-
-    print("\n\n************************************\n* Gestion MongoDB : MODE INTERACTIF pour CRUD*\n************************************")
-    db = choisir_ou_creer_base(client)                  #Permet de choisir ou de créer une base de données cible pour la migration
-    if db is not None:
-      collection = choisir_ou_creer_collection(db)      #Permet de choisir ou de créer une collection dans la base cible
-      if collection is not None:
-          while True:
-            print("""
-        1. Gérer les clés  # CRUD sur la collection clés 
-        2. Insérer un document manuellement
-        3. Migrer depuis CSV
-        4. Quitter
-        """)
-            choix = input("Votre choix : ").strip()
-            if choix=="1":
-              choisir_ou_creer_cles(db, collection)  #Choisir ou créer des clés dans la collection "cles" afin de faciliter l’ajout de documents dans la collection cible.
-            elif choix=="2":
-              inserer_document_manuellement(db, collection) #Permet d’insérer manuellement des documents dans la collection cible choisie
-            elif choix=="3":
-             csv_file = input("Chemin du CSV : ").strip()
-             nettoyer_et_migrer_csv(db, collection, csv_file,args.pas_vider_col)  #Lance la fonction de migration du fichier CSV avec un nettoyage préalable. La collection est vidée par default 
-            elif choix=="4":
-               break
-            else:
-             print("Choix invalide.")
-             
 
 
 
