@@ -28,7 +28,7 @@ Avant de pouvoir utiliser ce projet, assurez-vous d’avoir installé les élém
   - [Installer Docker Compose](https://docs.docker.com/compose/install/)
 
 - **Git** : pour cloner le dépôt et gérer les versions.  
-  - [Installer Git](https://git-scm.com/book/fr/v2/Prise-en-main-Installation-de-Git)
+  - [Installer Git](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git)
 
 ## 3. Authentification et rôles 
 
