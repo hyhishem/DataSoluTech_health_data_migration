@@ -21,8 +21,14 @@ Cette version comprend :
    - Insertion manuelle de documents ou migration automatisée depuis des fichiers CSV.  
 
 ## 2. Prérequis
-Docker et Docker Compose: installés pour déployer les conteneurs MongoDB, Python et Mongo Express.  
+Avant de pouvoir utiliser ce projet, assurez-vous d’avoir installé les éléments suivants :
 
+- **Docker** et **Docker Compose** : pour déployer les conteneurs MongoDB, Python et Mongo Express.  
+  - [Installer Docker](https://docs.docker.com/desktop/)  
+  - [Installer Docker Compose](https://docs.docker.com/compose/install/)
+
+- **Git** : pour cloner le dépôt et gérer les versions.  
+  - [Installer Git](https://git-scm.com/book/fr/v2/Prise-en-main-Installation-de-Git)
 
 ## 3. Authentification et rôles 
 
@@ -82,13 +88,12 @@ Ce programme permet d'automatiser la migration depuis un fichier CSV vers MongoD
 --new_age : Nouvelle valeur pour la clé Age
 
 
-
 #### 5.1. Migration du fichier CSV:
 
 Pour réaliser la migration du fichier dataset.csv vers Mongodb vous pouvez utiliser :
 
  ```bash
-$ docker exec -it python python3 /app/main_script.py --csv /data/dataset.csv --db health_data --collection patients --user rw  --password rw123
+docker exec -it python python3 /app/main_script.py --csv /data/dataset.csv --db health_data --collection patients --user rw  --password rw123
  ```
 
 #### 5.2. Operation CRUD :
@@ -103,7 +108,7 @@ docker exec -it python python3 /app/main_script.py --db health_data --collection
  - CREATE: Création du patient "Nom Prenom" agé de 38ans
  
  ```bash
-docker exec -it python python3 /app/main_script.py --db health_data --collection patients  --user rw  --password rw123 --crud c --nom "Patients 1" --age 38
+docker exec -it python python3 /app/main_script.py --db health_data --collection patients  --user rw  --password rw123 --crud c --nom "Nom Prenom" --age 38
  ```
 
  - READ: Mise en évidence de la présence du patient "Nom Prenom"  dans la collection patients
