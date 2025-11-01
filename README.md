@@ -71,7 +71,7 @@ Ce programme permet d'automatiser la migration depuis un fichier CSV vers MongoD
 
 --pas_vider_col : optionnelle, vide la collection avant insertion par defaut, ajouter pour ne pas vider la collection.
 
---crud : Action CRUD: c-Create  r-Read  u-Update ou d-Delete
+--crud : Action CRUD: c-Create  r-Read  u-Update ou d-Delete (Si vous souhaitez supprimer la collection ne pas indiquer le nom. ) 
 
 --nom : Valeur pour la clé Name
 

@@ -58,7 +58,7 @@ if args.csv and args.db and args.collection and ( client is not None):
 elif client is None:
         print("Erreur d'identifiant ou de mot de passe")
 
-elif args.crud and args.nom and args.db and args.collection and ( client is not None):
+elif args.crud and args.db and args.collection and ( client is not None):
         db = client[args.db]                                                    #Selectione ou crée la base de donnée spécifiée par l'argument --db 
         collection = db[args.collection]                                        #Selectione ou crée la collection spécifiée par l'argument --collection
         crud_collection(db, collection,args.crud,args.nom, args.age, args.new_nom ,args.new_age)

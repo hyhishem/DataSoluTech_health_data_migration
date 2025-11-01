@@ -5,7 +5,8 @@ from pymongo import MongoClient
 from datetime import datetime
 
 
-def crud_collection(db, collection,num_crud,nom_doc=None, age_doc=None, new_nom=None , new_age=None):
+def crud_collection(db, collection,num_crud, nom_doc=None, age_doc=None, new_nom=None , new_age=None):
+
 
 ##########
 # Creer un documents de la collection    
@@ -77,14 +78,15 @@ def crud_collection(db, collection,num_crud,nom_doc=None, age_doc=None, new_nom=
 # Supprimer un documents de la collection    
 ############
         elif num_crud=='d':
-            try:        
-                collection.delete_one({"Name":nom_doc, "Age":age_doc}) 
-            except Exception as e:    
-                if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
-                    print("Vous n'avez pas les droits pour supprimer des documents.")
-                elif  "duplicate key" in  e.details.get("errmsg", str(e)).lower():      
-                        print("Erreur: Critère d'unicité de l'index non respecté ")
-                else:
-                        print("Erreur mongo :" , e.details.get("errmsg", str(e)) )
+            if not nom_doc:
+                collection.drop()
+            else:
+                try:        
+                    collection.delete_one({"Name":nom_doc, "Age":age_doc}) 
+                except Exception as e:    
+                    if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
+                        print("Vous n'avez pas les droits pour supprimer des documents.")
+                    else:
+                            print("Erreur mongo :" , e.details.get("errmsg", str(e)) )
 
 
