@@ -17,11 +17,11 @@ Cette version comprend :
 2. Un script principal utilisant plusieurs fonctions : 
    - Gestion interactive et automatisée des bases de données et collections MongoDB. 
    - Création et gestion des clés pour structurer les documents. 
-   - Nettoyage et transformation des données avant insertion pour garantir la cohérence et l’intégrité
+   - Nettoyage et transformation des données avant insertion pour garantir la cohérence et l'intégrité
    - Insertion manuelle de documents ou migration automatisée depuis des fichiers CSV. 
 
 ## 2. Prérequis
-Avant de pouvoir utiliser ce projet, assurez-vous d’avoir installé les éléments suivants :
+Avant de pouvoir utiliser ce projet, assurez-vous d'avoir installé les éléments suivants :
 
 - **Docker** et **Docker Compose** : pour déployer les conteneurs MongoDB, Python et Mongo Express. 
   - [Installer Docker](https://docs.docker.com/desktop/) 
@@ -77,7 +77,7 @@ Ce programme permet d'automatiser la migration depuis un fichier CSV vers MongoD
 
 --pas_vider_col : optionnelle, vide la collection avant insertion par defaut, ajouter pour ne pas vider la collection.
 
---crud : Action CRUD: c-Create  r-Read  u-Update ou d-Delete
+--crud : Action CRUD: c -Create  r -Read  u -Update ou d -Delete
 
 --nom : Valeur pour la clé Name
 
@@ -135,6 +135,3 @@ docker exec -it python python3 /app/main_script.py --db health_data --collection
  ```bash
 docker exec -it python python3 /app/main_script.py --db health_data --collection patients  --user rw  --password rw123 --crud d --nom "Nom Prenom" 
  ```
-
-
-
