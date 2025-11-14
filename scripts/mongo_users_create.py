@@ -14,7 +14,7 @@ try:
             pwd=os.getenv("MONGO_RW_PASS"),
             roles=[{"role":"readWriteAnyDatabase","db":"admin"}]) # création d'un nouvelle utilisateur read + write
 except Exception as e:
-    print('Erreur :', e.details.get("errmsg", str(e)) )
+    print('Erreur :', e.details.get("errmsg") )
 
 
 
@@ -23,7 +23,7 @@ try:
             pwd=os.getenv("MONGO_READ_PASS"),
             roles=[{"role":"readAnyDatabase","db":"admin"}])  # création d'un nouvelle utilisateur read seulement
 except Exception as e:
-    print('Erreur :', e.details.get("errmsg", str(e)) )
+    print('Erreur :', e.details.get("errmsg") )
 
 
 

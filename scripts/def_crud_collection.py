@@ -20,13 +20,13 @@ def crud_collection(db, collection,num_crud, nom_doc=None, age_doc=None, new_nom
                     print(f"Le patient 'Name': {nom_doc} a été ajouté:\n")
                 else:
                     print(f"Vous devez specifier le nom du patient:\n")
-            except Exception as e:    
-                if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
+            except Exception as e:  
+                if  "not authorized" in  e.details.get("errmsg").lower():      
                     print("Vous n'avez pas les droits pour ajouter des documents.")
-                elif  "duplicate key" in  e.details.get("errmsg", str(e)).lower():      
+                elif  "duplicate key" in  e.details.get("errmsg").lower():      
                         print("Erreur: Critère d'unicité de l'index non respecté ")
                 else:
-                        print("Erreur mongo :" , e.details.get("errmsg", str(e)) )
+                        print("Erreur mongo :" , e.details.get("errmsg") )
         
 ##########
 # Afficher un documents de la collection    
@@ -45,12 +45,12 @@ def crud_collection(db, collection,num_crud, nom_doc=None, age_doc=None, new_nom
                 if not doc_nom:
                     print('Aucun résultat pour cette recherche')
             except Exception as e:    
-                if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
+                if  "not authorized" in  e.details.get("errmsg").lower():      
                     print("Vous n'avez pas les droits pour lire des documents.")
-                elif  "duplicate key" in  e.details.get("errmsg", str(e)).lower():      
+                elif  "duplicate key" in  e.details.get("errmsg").lower():      
                         print("Erreur: Critère d'unicité de l'index non respecté ")
                 else:
-                        print("Erreur mongo :" , e.details.get("errmsg", str(e)) )
+                        print("Erreur mongo :" , e.details.get("errmsg") )
 
 
 
@@ -65,12 +65,12 @@ def crud_collection(db, collection,num_crud, nom_doc=None, age_doc=None, new_nom
                 if new_nom:            
                     collection.update_one({"Name":nom_doc, "Age":age_doc},{"$set": {"Name": new_nom}})                         
             except Exception as e:    
-                if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
+                if  "not authorized" in  e.details.get("errmsg").lower():      
                     print("Vous n'avez pas les droits pour modifier des documents.")
-                elif  "duplicate key" in  e.details.get("errmsg", str(e)).lower():      
+                elif  "duplicate key" in  e.details.get("errmsg").lower():      
                         print("Erreur: Critère d'unicité de l'index non respecté ")
                 else:
-                        print("Erreur mongo :" , e.details.get("errmsg", str(e)) )
+                        print("Erreur mongo :" , e.details.get("errmsg") )
 
 
 
@@ -84,9 +84,9 @@ def crud_collection(db, collection,num_crud, nom_doc=None, age_doc=None, new_nom
                 try:        
                     collection.delete_one({"Name":nom_doc, "Age":age_doc}) 
                 except Exception as e:    
-                    if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
+                    if  "not authorized" in  e.details.get("errmsg").lower():      
                         print("Vous n'avez pas les droits pour supprimer des documents.")
                     else:
-                            print("Erreur mongo :" , e.details.get("errmsg", str(e)) )
+                            print("Erreur mongo :" , e.details.get("errmsg") )
 
 
