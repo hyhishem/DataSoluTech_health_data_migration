@@ -34,7 +34,7 @@ def nettoyer_et_migrer_csv(db, collection, csv_file, pas_vider_col):
     if pas_vider_col: # par default vrais sauf si on ajout l'argument pas_vider_col
         try :
             collection.delete_many({})
-            print(f"Tous les documents de la collection {collection.name} ont été supprimé.")
+          #  print(f"Tous les documents de la collection {collection.name} ont été supprimé.")
         except Exception as e:
            if  "not authorized" in  e.details.get("errmsg", str(e)).lower():      
                 print("Vous n'avez pas les droits pour supprimer des documents.")
