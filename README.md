@@ -27,16 +27,35 @@ Avant de pouvoir utiliser ce projet, assurez-vous d'avoir installé les élémen
   - [Installer Docker](https://docs.docker.com/desktop/) 
   - [Installer Docker Compose](https://docs.docker.com/compose/install/)
 
-- **Git** : pour cloner le dépôt et gérer les versions. 
+- **Git** :
   - [Installer Git](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git)
+ 
+Après avoir installé Git, placez-vous dans le dossier où vous souhaitez cloner le dépôt distant, puis exécutez la commande suivante :
+
+ ```bash
+git clone https://github.com/hyhishem/DataSoluTech_health_data_migration.git
+ ```
+Ensuite, accédez au dossier cloné :
+
+ ```bash
+cd DataSoluTech_health_data_migration
+ ```
 
 ## 3. Authentification et rôles 
 
 Trois comptes sont crées :
 
-- admin pour la gestion complète. Mot de passe admin123
-- rw pour l'ecriture et la lecture.  Mot de passe rw123
-- read en lecture seule. Mot de passe read123
+- Pour la gestion complète
+    - Identifiant : admin
+    - Mot de passe : admin123
+      
+- Pour l'ecriture et la lecture.
+    - Identifiant : rw
+    -  Mot de passe : rw123
+      
+- Pour la lecture seule
+    -  Identifiant : read
+    -  Mot de passe read123
 
 L'acces à Mongo Express est possible sur http://localhost:8081
 
@@ -49,7 +68,7 @@ L'acces à Mongo Express est possible sur http://localhost:8081
 Pour déployer l'environnement complet avec MongoDB, Mongo Express et le conteneur Python : 
 
  ```bash
- $ docker-compose up -d
+  docker-compose up -d
  ```
 Cette commande :
 - Télécharge les images nécessaires (MongoDB, Mongo Express, Python).
@@ -62,7 +81,7 @@ Cette commande :
 Avant l'utilisation verifier que les service python et mongo-express sont demarré. Si ce n'est pas le cas utiliser cette commande 
 
 ```bash
-$ docker start python mongo-express 
+ docker start python mongo-express 
 ```
 
 Ce programme permet d'automatiser la migration depuis un fichier CSV vers MongoDB ou de réaliser des actions CRUD . Les arguments disponible sont :
