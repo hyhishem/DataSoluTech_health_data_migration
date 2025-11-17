@@ -29,7 +29,6 @@ services:
       MONGO_RW_PASS: ${MONGO_RW_PASS}
       MONGO_READ_USER: ${MONGO_READ_USER}
       MONGO_READ_PASS: ${MONGO_READ_PASS}
-      MONGO_DB_NAME: ${MONGO_DB_NAME}
       PYTHONDONTWRITEBYTECODE: 1
     networks:
       - mongo_net
@@ -46,8 +45,8 @@ services:
     depends_on:
       - mongo
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin123
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
       ME_CONFIG_MONGODB_SERVER: mongo
     networks:
       - mongo_net

@@ -19,7 +19,7 @@ except Exception as e:
 
 
 try:
-    db.command("createUser", os.getenv("MNGO_READ_USER"), 
+    db.command("createUser", os.getenv("MONGO_READ_USER"), 
             pwd=os.getenv("MONGO_READ_PASS"),
             roles=[{"role":"readAnyDatabase","db":"admin"}])  # création d'un nouvelle utilisateur read seulement
 except Exception as e:

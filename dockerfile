@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Copier les scripts et requirements
+# Copier requirements
 COPY ./scripts/requirements.txt /app/requirements.txt
 
 # Installer les dépendances pendant le build
