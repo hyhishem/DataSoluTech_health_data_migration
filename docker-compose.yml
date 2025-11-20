@@ -18,8 +18,8 @@ services:
       dockerfile: dockerfile  
     container_name: python
     volumes:
-      - ./scripts:/app     
-      - ./data:/data       
+      - ./app:/app     
+      - ./data:/data
     depends_on:
       - mongo
     environment:

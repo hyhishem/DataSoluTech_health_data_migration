@@ -1,10 +1,12 @@
 FROM python:3.11-slim
 
-# Copier requirements
-COPY ./scripts/requirements.txt /app/requirements.txt
+WORKDIR /
 
-# Installer les dépendances pendant le build
-RUN pip install --no-cache-dir -r /app/requirements.txt
+# Copier uniquement requirements.txt à la racine
+COPY requirements.txt .
 
-# Commande par défaut à l'exécution
+# Installer les dépendances
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Commande par défaut
 CMD ["bash"]

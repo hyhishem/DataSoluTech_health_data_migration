@@ -154,3 +154,15 @@ docker exec -it python python3 /app/main_script.py --db health_data --collection
  ```bash
 docker exec -it python python3 /app/main_script.py --db health_data --collection patients  --user rw  --password rw123 --crud d --nom "Nom Prenom" 
  ```
+ 
+  
+## 6. Test avec Pytest
+
+Les tests unitaires sont réalisés avec pytest et utilisent mongomock pour simuler MongoDB en mémoire. Cela permet de tester la fonction crud_collection sans avoir besoin d’une base MongoDB réelle.
+
+Pour exécuter le test sur l'ajout et la modification  :
+
+
+ ```bash
+docker exec -it python pytest /app/test_crud.py
+ ```
